@@ -1,3 +1,5 @@
+include(GenerateExportHeader)
+
 set(DUMMYLIB_SRC
         include/dummy.h
         src/dummy.cpp)
@@ -13,6 +15,15 @@ if (DUMMYLIB_BUILD_STATIC)
     add_library(dummy_static STATIC ${DUMMYLIB_SRC})
     set_property(TARGET dummy_static PROPERTY CXX_STANDARD 11)
     target_compile_definitions(dummy_static PUBLIC DUMMYLIB_STATIC)
+
+    generate_export_header(dummy_static
+		EXPORT_MACRO_NAME DUMMYLIB_API
+		EXPORT_FILE_NAME ${CMAKE_CURRENT_BINARY_DIR}/include/api.h
+		DEPRECATED_MACRO_NAME DUMMYLIB_DEPRECATED
+		NO_EXPORT_MACRO_NAME DUMMYLIB_NO_EXPORT
+		STATIC_DEFINE DUMMYLIB_STATIC
+		NO_DEPRECATED_MACRO_NAME DUMMYLIB_NO_DEPRECATED
+    )
 
     target_include_directories(dummy_static
             PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
