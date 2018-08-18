@@ -20,3 +20,5 @@ Add this flag in the root `CMakeLists.txt`:
 ```
 option(CMAKE_STARTER_PROJECT_INCLUDE_GOOGLETEST "Include the vendored thirdparty googletest library." ON)
 ```
+
+This is based on the libstore project: https://github.com/FabianHahn/libstore
